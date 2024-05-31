@@ -3,11 +3,11 @@ import 'package:practice_for_ca_and_state_management/data/models/login_model.dar
 import 'package:practice_for_ca_and_state_management/data/models/otp.dart';
 import 'package:practice_for_ca_and_state_management/data/models/pass_model.dart';
 import 'package:practice_for_ca_and_state_management/data/models/user_model.dart';
+import 'package:practice_for_ca_and_state_management/domain/entities/change_password.dart';
 import 'package:practice_for_ca_and_state_management/domain/entities/forgot_password.dart';
 import 'package:practice_for_ca_and_state_management/domain/entities/otp.dart';
 import 'package:practice_for_ca_and_state_management/domain/entities/user_login.dart';
 import 'package:practice_for_ca_and_state_management/domain/repositories/auth_repositories.dart';
-
 import '../../domain/entities/password.dart';
 import '../../domain/entities/user.dart';
 
@@ -39,7 +39,8 @@ class authRepoImpl implements authRepository {
 
     final passModel = passModels(
       password : createPassword.password,
-      confirmPassword : createPassword.confirmPassword
+      confirmPassword : createPassword.confirmPassword, 
+      
     );
 
     await source.cpassword(passModel);
@@ -67,13 +68,14 @@ class authRepoImpl implements authRepository {
     await source.fPassword(fPasswordModels);
   }
 
-  Future<void> changePassword(cPassword createPassword) async {
+  Future<void> newPassword(changePassword newpassword) async {
 
-    final passModel = passModels(
-      password : createPassword.password,
-      confirmPassword : createPassword.confirmPassword
+    final newpassModel = changePassModels(
+      password : newpassword.password,
+      rebeatPassword : newpassword.rebeatPassword
     );
 
-    await source.cpassword(passModel);
+    await source.changePassword(newpassModel);
   }
+
 }

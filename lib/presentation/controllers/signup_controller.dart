@@ -129,36 +129,7 @@ super.onClose();
 
   }
 
-  class OtpController extends GetxController {
-
-    TextEditingController otpController = TextEditingController();
-
-    final otpUseCase verifyUseCase;
-    OtpController ({required this.verifyUseCase});
-
-    Future<void> verify(String otp) async {
-
-      final verify = otpController.text;
-
-      if(verify.isEmpty) {
-      Get.snackbar('Error', 'Please fill all fields');
-      return;
-  }
-
-    try{
-
-    await verifyUseCase.call(verifyOtp(otp : verify));
-    Get.snackbar('You are registered', '');
-    Get.toNamed('');
-
-    }catch (e) {
-
-        print('$e');
-
-    }
-
-    }
-  }
+ 
 
 
 

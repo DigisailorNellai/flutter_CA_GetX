@@ -1,5 +1,7 @@
 import 'package:practice_for_ca_and_state_management/domain/entities/password.dart';
 
+import '../../domain/entities/change_password.dart';
+
 class passModels extends cPassword {
 
   passModels ({
@@ -19,23 +21,24 @@ class passModels extends cPassword {
 
     return passModels(
       password: json['password'], 
-      confirmPassword: json['confirmPassword']);
+      confirmPassword: json['confirmPassword'],
+      );
 
   }
 }
 
-class changePassModels extends cPassword {
+class changePassModels extends changePassword {
 
   changePassModels ({
     required String password,
     required String rebeatPassword,
-  }) :super(password: password, confirmPassword: rebeatPassword);
+  }) : super(password: password, rebeatPassword: rebeatPassword);
 
   Map<String, dynamic> toJson () {
 
     return {
       'password' : password,
-      'rebeatPassword' : confirmPassword
+      'rebeatPassword' : rebeatPassword
     };
   }
 
@@ -43,7 +46,7 @@ class changePassModels extends cPassword {
 
     return changePassModels(
       password: json['password'], 
-      rebeatPassword : json['confirmPassword']);
+      rebeatPassword : json['rebeatPassword']);
 
   }
 }

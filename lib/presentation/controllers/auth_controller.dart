@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:practice_for_ca_and_state_management/domain/entities/change_password.dart';
 import 'package:practice_for_ca_and_state_management/domain/entities/forgot_password.dart';
 import 'package:practice_for_ca_and_state_management/domain/useCases/signIn.dart';
-
 import '../../domain/entities/otp.dart';
-import '../../domain/entities/password.dart';
 import '../../domain/entities/user_login.dart';
 import '../../domain/useCases/sign_up.dart';
 
@@ -57,7 +56,7 @@ Future<void> login( String email, String password) async {
 
 await loginUse.call(userLogin(email : email , password : password));
 Get.snackbar('Successfully loggedin', ' ');
-//Get.toNamed('/createPassword');
+Get.toNamed('/homePage');
 }
 catch (e) {
 
@@ -154,10 +153,10 @@ class changePassController extends GetxController {
   TextEditingController passwordController = TextEditingController();
  TextEditingController confirmPasswordController = TextEditingController();
 
-  final passwordUsecases passUseCase;
-  changePassController ({required this.passUseCase});
+  final changePasswordUsecase changepassUseCase;
+  changePassController ({required this.changepassUseCase});
 
-  Future<void> createPassword(String password , String confirmPassword) async {
+  Future<void> newPassword(String password , String confirmPassword) async {
 
   final password = passwordController.text;
   final confirmPassword = confirmPasswordController.text;
@@ -169,9 +168,9 @@ class changePassController extends GetxController {
 
 try{
 
- await passUseCase.call(cPassword(password: password, confirmPassword: confirmPassword));
+ await changepassUseCase.call(changePassword(password: password, rebeatPassword: confirmPassword));
 Get.snackbar('password changed successfully', '');
-Get.toNamed('/mainVerification');
+Get.toNamed('/homePage');
 
 }catch (e) {
 
@@ -191,40 +190,6 @@ super.onClose();
 
   }
 
-  class resendController extends GetxController {
-
-    TextEditingController resendOtpController = TextEditingController();
-
-    final otpUseCase verifyUseCase;
-    resendController ({required this.verifyUseCase});
-
-    Future<void> verify(String otp) async {
-
-      final verify = resendOtpController.text;
-
-      if(verify.isEmpty) {
-      Get.snackbar('Error', 'Please fill all fields');
-      return;
-  }
-
-    try{
-
-    await verifyUseCase.call(verifyOtp(otp : verify));
-    Get.snackbar('You are registered', '');
-
-    }catch (e) {
-
-        print('$e');
-
-    }
-    @override
-  void onClose() {
-    
-    resendOtpController.dispose();
-    super.onClose();
-
-    }
-  }
-}
+  
 
 

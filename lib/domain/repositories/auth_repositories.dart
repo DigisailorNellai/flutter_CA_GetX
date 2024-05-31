@@ -1,3 +1,4 @@
+import 'package:practice_for_ca_and_state_management/domain/entities/change_password.dart';
 import 'package:practice_for_ca_and_state_management/domain/entities/forgot_password.dart';
 import 'package:practice_for_ca_and_state_management/domain/entities/password.dart';
 import 'package:practice_for_ca_and_state_management/domain/entities/user.dart';
@@ -15,5 +16,6 @@ Future<void> password(cPassword createPassword);
 Future<void> Otp(verifyOtp otp);
 Future<void> userlogin(userLogin login);
 Future<void> forgotPassword(fPassword chPassword);
+Future<void> newPassword(changePassword newpassword);
 
 }

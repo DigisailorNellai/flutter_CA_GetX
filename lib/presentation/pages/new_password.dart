@@ -165,7 +165,7 @@ class newPassword extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(30)),
                               child: ElevatedButton(
                                   onPressed: () {
-                                    controller.createPassword(controller.passwordController.text, controller.confirmPasswordController.text);
+                                    controller.newPassword(controller.passwordController.text, controller.confirmPasswordController.text);
                                   },
                                   style: ButtonStyle(
                                       backgroundColor:

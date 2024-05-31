@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:practice_for_ca_and_state_management/data/models/login_model.dart';
 import 'package:practice_for_ca_and_state_management/data/models/otp.dart';
 import 'package:practice_for_ca_and_state_management/data/models/pass_model.dart';
@@ -5,9 +6,13 @@ import 'package:practice_for_ca_and_state_management/data/models/user_model.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:practice_for_ca_and_state_management/presentation/pages/new_password.dart';
+
+
 
 
 class dataSource {
+  
 
 final String baseUrl = 'http://10.0.2.2:8080';
 
@@ -62,7 +67,7 @@ final response = await http.post(
     headers:  { 'Content-Type' : 'application/json'},
     body: json.encode(login.toJson())
    );
-
+    print(response.statusCode);
    if(response.statusCode != 200) {
       throw Exception('Failed to login');
    }
@@ -95,18 +100,31 @@ final response = await http.post(
     }
   }
 
-  Future<void> changePassword(passModels createPassword) async {
+  Future<void> changePassword(changePassModels newpassword) async {
 
   final response = await http.post(
     Uri.parse('$baseUrl/changePassword'),
     headers: { 'Content-Type' : 'application/json'},
-    body: json.encode(createPassword.toJson())
+    body: json.encode(newpassword.toJson())
   );
-
-  if(response.statusCode != 201) {
-  
-throw Exception('cannot create password');
+  print(response.statusCode);
+  if(response.statusCode != 200) {
+    throw Exception('cannot create password');
   }
 
+ }
+
+ Future<void> resendOtpmail() async{
+
+  final response = await http.post(
+    Uri.parse('$baseUrl/resendotp'),
+    headers: {'Content-Type' : 'application/json'},
+     
+  );
+  print(response.statusCode);
+  if(response.statusCode == 200) {
+   
+    Get.snackbar('Otp has resent successfully', 'check your inbox' );
+  }
  }
 }

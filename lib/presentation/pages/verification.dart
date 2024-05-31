@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:practice_for_ca_and_state_management/data/dataSources/auth_remote_data_source.dart';
 import 'package:practice_for_ca_and_state_management/presentation/controllers/verification_controller.dart';
 
-import '../controllers/auth_controller.dart';
 
 class verificationPage extends StatelessWidget {
   const verificationPage({super.key});
@@ -11,8 +11,7 @@ class verificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    Otp2Controller controller2 = Get.find();
-    verficationController controller = Get.put(verficationController());
+    verficationController controller = Get.find();
     return Scaffold(
       body: Stack(
         children: [
@@ -46,8 +45,8 @@ class verificationPage extends StatelessWidget {
             color: Colors.white
           ),)
             ],),
-            SizedBox(height: 100,),
-            Text('Verify Email Address',
+            const SizedBox(height: 100,),
+            const Text('Verify Email Address',
                 style: TextStyle(
                 fontFamily: 'Lato',
                 fontWeight: FontWeight.w600,
@@ -109,12 +108,12 @@ class verificationPage extends StatelessWidget {
                  
                 
                   ),
-                  Padding(padding: EdgeInsets.only(left: 50),
+                  Padding(padding: const EdgeInsets.only(left: 50),
                   child: Row(
                     children: [
                       Obx(() {
                     return Text('${controller.remainingSeconds.value}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white
                     ),
                     );
@@ -135,7 +134,7 @@ class verificationPage extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: (){
-                     controller2.verify(controller2.otp2Controller.text);
+                     controller.verify2();
                      
               }, style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)
@@ -169,7 +168,7 @@ class verificationPage extends StatelessWidget {
                     return Visibility(
                       visible: controller.showResend.value,
                       child:GestureDetector(
-                      onTap: controller.resend,
+                      onTap: controller.resendOtp,
                       child: const Text(
                         'Resend OTP',
                         style: TextStyle(

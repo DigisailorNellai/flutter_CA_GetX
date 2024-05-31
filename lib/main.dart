@@ -6,8 +6,12 @@ import 'package:practice_for_ca_and_state_management/domain/useCases/signIn.dart
 import 'package:practice_for_ca_and_state_management/domain/useCases/sign_up.dart';
 import 'package:practice_for_ca_and_state_management/presentation/controllers/auth_controller.dart';
 import 'package:practice_for_ca_and_state_management/presentation/controllers/signup_controller.dart';
+import 'package:practice_for_ca_and_state_management/presentation/controllers/verification_controller.dart';
+import 'package:practice_for_ca_and_state_management/presentation/pages/aboutus.dart';
 import 'package:practice_for_ca_and_state_management/presentation/pages/admin_login.dart';
 import 'package:practice_for_ca_and_state_management/presentation/pages/create_password.dart';
+import 'package:practice_for_ca_and_state_management/presentation/pages/donation_page.dart';
+import 'package:practice_for_ca_and_state_management/presentation/pages/events.dart';
 import 'package:practice_for_ca_and_state_management/presentation/pages/forgot_password.dart';
 import 'package:practice_for_ca_and_state_management/presentation/pages/home_page.dart';
 import 'package:practice_for_ca_and_state_management/presentation/pages/intro.dart';
@@ -30,15 +34,16 @@ void main() {
   final verifyUseCase = otpUseCase(repository: authRepository);
   final loginUseCase = loginUsecase(repository: authRepository);
   final fPasswordUse = fPasswordUsecase(repository: authRepository);
+  final changepassUseCase = changePasswordUsecase(repository: authRepository);
 
   Get.put(signUpController(useCase: useCase));
   Get.put(passController(passUseCase: passUseCase));
-  //Get.put(OtpController(verifyUseCase: verifyUseCase));
+  Get.put(verficationController(verifyUseCase: verifyUseCase, source: source));
   Get.put(authController(loginUse: loginUseCase));
   Get.put(fPasswordController(fPasswordUse: fPasswordUse));
   Get.put(Otp2Controller(verifyUseCase: verifyUseCase));
-  Get.put(changePassController(passUseCase: passUseCase));
-  Get.put(resendController(verifyUseCase: verifyUseCase));
+  Get.put(changePassController(changepassUseCase: changepassUseCase));
+  
 
   
 
@@ -62,7 +67,10 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/createPassword', page: () => const createPassword()),
         GetPage(name: '/newPassword', page: () => const newPassword()),
         GetPage(name: '/mainVerification', page: () => const mainVerificationPage()),
-      
+        GetPage(name: '/homePage', page: () => const homePage()),
+        GetPage(name: '/events', page: () => const events()),
+        GetPage(name: '/aboutUs', page: () => const aboutUs()),
+        GetPage(name: '/donationPage', page: () => const donationPage())
         ],
     );
   }
